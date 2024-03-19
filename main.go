@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strconv"
 	"time"
+
+	"github.com/bradhe/stopwatch"
 )
 
 
@@ -31,13 +33,19 @@ func ChannelExample() {
 func main() {
 	fmt.Println(".....")
 
+
+	sw := stopwatch.Start()
 	for i := 0; i < 1000000; i++ {
-		go SayHello("Index ke: " + strconv.Itoa(i))
+		SayHello("Index ke: " + strconv.Itoa(i))
 	}
+	sw.Stop()
 
 	fmt.Println(".....")
 
 	ChannelExample()
 
 	time.Sleep(1 * time.Microsecond)
+
+	// print execute time
+	fmt.Println("Execute Time: ", sw.Milliseconds(), "")
 }
